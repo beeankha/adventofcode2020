@@ -1,4 +1,3 @@
-from sys import exit
 import re
 
 f = open("input.txt", "r")
@@ -10,12 +9,12 @@ for i in f.read().split("\n\n"):
 
 pid_pattern = re.compile("^[0-9]{9}$")
 hcl_pattern = re.compile("^#[0-9a-f]{6}$")
+
 valid_passports = 0
 for item in input_list:
     my_map = {}
     for a_line in item.split("\n"):
         for an_entry in a_line.split(" "):
-            # print(an_entry)
             key_value = an_entry.split(":")
             if len(key_value) != 2:  # account for trailing whitespace
                 continue
