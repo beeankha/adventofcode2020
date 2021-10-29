@@ -1,7 +1,8 @@
-# Read the file
+import sys
 
 input_list = []
-max_seat_value = 0
+seat_ids = []
+
 with open("input.txt", "r") as f:
     for i in f.read().split("\n"):
         if not i:
@@ -9,10 +10,6 @@ with open("input.txt", "r") as f:
         input_list.append(i)
 
 for a_seat in input_list:
-    # Search through the rows in 6 steps (128 possibilities) to determine row location
-    # Search through the columns in 3 steps (8 possibilities) to determine column location
-    # Multiply the row by 8 and then add the column number in order to get the seat's "value"
-    # Determine which seat number has the highest value seat ID
     min_row_number = 0
     max_row_number = 127
 
@@ -33,7 +30,12 @@ for a_seat in input_list:
             min_col_number = min_col_number + mid_point
 
     seat_value = int((max_row_number * 8) + max_col_number)
-    if seat_value > max_seat_value:
-        max_seat_value = seat_value
+    seat_ids.append(seat_value)
 
-print(max_seat_value)
+min_index = 0
+seat_ids.sort()
+for i in range(0, len(seat_ids)):
+    if seat_ids[i] + 1 != seat_ids[i + 1]:
+        my_seat = seat_ids[i] + 1
+        print(f"This is your seat ID: {my_seat}")
+        exit(0)
