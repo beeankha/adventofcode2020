@@ -9,9 +9,11 @@ with open("input.txt", "r") as f:
 yes_answers = 0
 for group_response in input_list:
     group_map = {}  # the hash map!
+    # Create a hash map of just the first line of the group
     for individual_response in group_response.split("\n")[0]:
         for char in individual_response:
             group_map[char] = True
+    # Create a hash map for subsequent lines of the group
     for rest_of_group in group_response.split("\n")[1:]:
         if rest_of_group:
             if len(group_map) > 0:
