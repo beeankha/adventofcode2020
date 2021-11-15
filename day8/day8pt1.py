@@ -14,13 +14,15 @@ accumulator = 0
 # Need to use the index in order to figure out where to jump to for commands
 index = 0
 
-# Need to stop once a previously-encountered command is called again!
-visited_indexes = []
+# Have a set for the indexes instead of a list
+# If it's a list, it'll be O(n) due to scanning of the entire list (vs O(1) for
+# a set, since those work like a hash map)
+visited_indexes = set()
 
 while index not in visited_indexes:
     instruction_type = input_list[index][:3]
     counter = input_list[index][4:]
-    visited_indexes.append(index)
+    visited_indexes.add(index)  # Gotta "add" vs "append" because it's a set, not a list
     if instruction_type == 'nop':
         # nop = continue to the next step (so index += 1)
         index += 1
