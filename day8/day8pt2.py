@@ -10,7 +10,10 @@ with open("input.txt", "r") as f:
         input_list.append(i)
 
 def detect_infinite_loop(instructions):
-    visited_indexes = []
+    # Have a set for the indexes instead of a list
+    # If it's a list, it'll be O(n) due to scanning of the entire list (vs O(1) for
+    # a set, since those work like a hash map)
+    visited_indexes = set()
     accumulator = 0
     index = 0
     infinite_loop = True
@@ -21,7 +24,7 @@ def detect_infinite_loop(instructions):
             break
         instruction_type = instructions[index][:3]
         counter = instructions[index][4:]
-        visited_indexes.append(index)
+        visited_indexes.add(index)  # Gotta "add" vs "append" because it's a set, not a list
         if instruction_type == 'nop':
             index += 1
             continue
