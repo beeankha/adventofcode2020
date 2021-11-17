@@ -19,11 +19,9 @@ for group_response in input_list:
             if len(group_map) > 0:
                 existing_keys = list(group_map.keys())
                 for key in existing_keys:
-                    print(f"This is a group_map key: {key}")
                     if key not in rest_of_group:
                         del group_map[key]
             
-    print(group_map)
     # Take the number of those individual letters from each group and sum them
     yes_answers += len(group_map)
 
